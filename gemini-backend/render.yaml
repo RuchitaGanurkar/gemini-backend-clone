@@ -1,0 +1,41 @@
+services:
+  - type: web
+    name: gemini-backend-clone
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: chmod +x start.sh && ./start.sh
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: DATABASE_URL
+        fromDatabase:
+          name: gemini-backend-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: gemini-backend-redis
+          property: connectionString
+      - key: JWT_SECRET_KEY
+        generateValue: true
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: ENVIRONMENT
+        value: production
+
+databases:
+  - name: gemini-backend-db
+    databaseName: gemini_backend
+    user: gemini_user
+    plan: free
+
+services:
+  - type: redis
+    name: gemini-backend-redis
+    plan: free
+    maxmemoryPolicy: allkeys-lru 

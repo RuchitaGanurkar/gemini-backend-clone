@@ -37,7 +37,11 @@ def root():
 
 @app.get("/health")
 def health_check():
-    return {"status": "healthy"}
+    return {"status": "healthy", "timestamp": "2024-01-01T00:00:00Z"}
+
+@app.get("/api/health")
+def api_health_check():
+    return {"status": "healthy", "service": "gemini-backend-clone"}
 
 if __name__ == "__main__":
     import uvicorn
