@@ -28,15 +28,13 @@ services:
         sync: false
       - key: ENVIRONMENT
         value: production
+  - type: redis
+    name: gemini-backend-redis
+    plan: free
+    maxmemoryPolicy: allkeys-lru
 
 databases:
   - name: gemini-backend-db
     databaseName: gemini_backend
     user: gemini_user
-    plan: free
-
-services:
-  - type: redis
-    name: gemini-backend-redis
-    plan: free
-    maxmemoryPolicy: allkeys-lru 
+    plan: free 
