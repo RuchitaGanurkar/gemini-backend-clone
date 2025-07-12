@@ -32,6 +32,7 @@ services:
     name: gemini-backend-redis
     plan: free
     maxmemoryPolicy: allkeys-lru
+    ipAllowList: []
 
 databases:
   - name: gemini-backend-db
