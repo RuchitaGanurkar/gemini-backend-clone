@@ -1,0 +1,167 @@
+{
+  "info": {
+    "name": "Gemini Backend API",
+    "_postman_id": "gemini-backend-collection",
+    "description": "All endpoints for Gemini Backend Clone, organized by feature.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Signup",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\"mobile_number\": \"+1234567890\", \"name\": \"Test User\", \"email\": \"test@example.com\"}" },
+            "url": { "raw": "{{base_url}}/auth/signup", "host": ["{{base_url}}"], "path": ["auth", "signup"] }
+          }
+        },
+        {
+          "name": "Send OTP",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\"mobile_number\": \"+1234567890\"}" },
+            "url": { "raw": "{{base_url}}/auth/send-otp", "host": ["{{base_url}}"], "path": ["auth", "send-otp"] }
+          }
+        },
+        {
+          "name": "Verify OTP",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\"mobile_number\": \"+1234567890\", \"otp\": \"{{otp}}\"}" },
+            "url": { "raw": "{{base_url}}/auth/verify-otp", "host": ["{{base_url}}"], "path": ["auth", "verify-otp"] }
+          }
+        },
+        {
+          "name": "Forgot Password",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\"mobile_number\": \"+1234567890\"}" },
+            "url": { "raw": "{{base_url}}/auth/forgot-password", "host": ["{{base_url}}"], "path": ["auth", "forgot-password"] }
+          }
+        },
+        {
+          "name": "Change Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{jwt_token}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\"old_password\": \"string\", \"new_password\": \"newpassword123\"}" },
+            "url": { "raw": "{{base_url}}/auth/change-password", "host": ["{{base_url}}"], "path": ["auth", "change-password"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "Get Current User",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{jwt_token}}" }],
+            "url": { "raw": "{{base_url}}/user/me", "host": ["{{base_url}}"], "path": ["user", "me"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Chatroom",
+      "item": [
+        {
+          "name": "Create Chatroom",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{jwt_token}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\"title\": \"Test Chatroom\"}" },
+            "url": { "raw": "{{base_url}}/chatroom", "host": ["{{base_url}}"], "path": ["chatroom"] }
+          }
+        },
+        {
+          "name": "List Chatrooms",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{jwt_token}}" }],
+            "url": { "raw": "{{base_url}}/chatroom", "host": ["{{base_url}}"], "path": ["chatroom"] }
+          }
+        },
+        {
+          "name": "Get Chatroom by ID",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{jwt_token}}" }],
+            "url": { "raw": "{{base_url}}/chatroom/1", "host": ["{{base_url}}"], "path": ["chatroom", "1"] }
+          }
+        },
+        {
+          "name": "Send Message",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{jwt_token}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\"content\": \"Hello, how are you?\"}" },
+            "url": { "raw": "{{base_url}}/chatroom/1/message", "host": ["{{base_url}}"], "path": ["chatroom", "1", "message"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Subscription",
+      "item": [
+        {
+          "name": "Pro Subscription",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{jwt_token}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\"email\": \"test@example.com\"}" },
+            "url": { "raw": "{{base_url}}/subscribe/pro", "host": ["{{base_url}}"], "path": ["subscribe", "pro"] }
+          }
+        },
+        {
+          "name": "Subscription Status",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{jwt_token}}" }],
+            "url": { "raw": "{{base_url}}/subscribe/status", "host": ["{{base_url}}"], "path": ["subscribe", "status"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Webhook",
+      "item": [
+        {
+          "name": "Webhook Health",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/webhook/health", "host": ["{{base_url}}"], "path": ["webhook", "health"] }
+          }
+        },
+        {
+          "name": "Stripe Webhook",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\"type\": \"payment_intent.succeeded\"}" },
+            "url": { "raw": "{{base_url}}/webhook/stripe", "host": ["{{base_url}}"], "path": ["webhook", "stripe"] }
+          }
+        }
+      ]
+    }
+  ]
+} 
